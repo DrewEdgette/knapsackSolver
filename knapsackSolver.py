@@ -23,7 +23,7 @@ def knapsackSolver(capacity, items, prices, weights):
     items = items + 1
 
     # creates the table with -1 as the default value
-    table = [[-1 for x in range(capacity)] for y in range(items)]
+    table = [[-1 for w in range(capacity)] for i in range(items)]
 
     # sets the first row and column to 0 because no items will have no weight
     for i in range(items):
@@ -31,7 +31,9 @@ def knapsackSolver(capacity, items, prices, weights):
             if i == 0 or w == 0:
                 table[i][w] = 0
 
-    # for every element in the table, we plug it into a formula that will tell us what it should be. If the difference between the table weight value and the value of the corresponding element in the weight list is negative, we don't have to compare with max(). If it's positive, we need to find out which one is larger.
+    # for every element in the table, we plug it into a formula that will tell us what it should be. 
+    # If the difference between the table weight value and the value of the corresponding element in the weight list is negative,
+    # we don't have to compare with max(). If it's positive, we need to find out which one is larger.
     for i in range(1, items):
         for w in range(capacity):
             diff = w - weights[i - 1]
@@ -42,7 +44,8 @@ def knapsackSolver(capacity, items, prices, weights):
                     table[i - 1][w],
                     table[i - 1][diff] + prices[i - 1])  # formula
 
-    # once we have all of the table values, we need to start from the end of it and find the maximum value. Then we need to find the lowest row where that value shows up.
+    # once we have all of the table values, we need to start from the end of it and find the maximum value. 
+    # Then we need to find the lowest row where that value shows up.
 
     maximum = 0
     index = 0
