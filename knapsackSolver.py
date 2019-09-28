@@ -22,7 +22,7 @@ def knapsackSolver(capacity, items, prices, weights):
     capacity = capacity + 1
     items = items + 1
 
-    # creates the table with -1 as the default value
+    # creates the table with 0 as the default value
     table = [[0 for w in range(capacity)] for i in range(items)]
 
 
