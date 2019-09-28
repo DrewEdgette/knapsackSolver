@@ -23,17 +23,13 @@ def knapsackSolver(capacity, items, prices, weights):
     items = items + 1
 
     # creates the table with -1 as the default value
-    table = [[-1 for w in range(capacity)] for i in range(items)]
+    table = [[0 for w in range(capacity)] for i in range(items)]
 
-    # sets the first row and column to 0 because no items will have no weight
-    for i in range(items):
-        for w in range(capacity):
-            if i == 0 or w == 0:
-                table[i][w] = 0
 
     # for every element in the table, we plug it into a formula that will tell us what it should be. 
-    # If the difference between the table weight value and the value of the corresponding element in the weight list is negative,
-    # we don't have to compare with max(). If it's positive, we need to find out which one is larger.
+		# If the difference between the table weight value and the value of the corresponding element in 
+		# the weight list is negative, we don't have to compare with max(). If it's positive, 
+		# we need to find out which one is larger.
     for i in range(1, items):
         for w in range(capacity):
             diff = w - weights[i - 1]
@@ -44,8 +40,8 @@ def knapsackSolver(capacity, items, prices, weights):
                     table[i - 1][w],
                     table[i - 1][diff] + prices[i - 1])  # formula
 
-    # once we have all of the table values, we need to start from the end of it and find the maximum value. 
-    # Then we need to find the lowest row where that value shows up.
+    # once we have all of the table values, we need to start from the end of it and find the maximum
+		# value. Then we need to find the lowest row where that value shows up.
 
     maximum = 0
     index = 0
@@ -55,9 +51,11 @@ def knapsackSolver(capacity, items, prices, weights):
             maximum = max(i)  # maximum value
             index = table.index(i)  # row where it shows up
 
-    # take maximum and subtract the corresponding prices index value. This will give us the next element to look for.
+    # take maximum and subtract the corresponding prices index value. 
+		# This will give us the next element to look for.
 
-    # If we are certain that this is the lowest row that value shows up in, we can say that the item in solution[index-1] can be taken.
+    # If we are certain that this is the lowest row that value shows up in, 
+		# we can say that the item in solution[index-1] can be taken.
 
     next1 = maximum - prices[index - 1]
     solution[index - 1] = 1
